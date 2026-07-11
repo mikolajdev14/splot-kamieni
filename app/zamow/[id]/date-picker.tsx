@@ -1,8 +1,93 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-export const DatePicker = () => {
-  const [selected, setSelected] = useState();
-  return <DayPicker selected={selected} />;
+import type { Booking } from "./page";
+import type { Dispatch, SetStateAction } from "react";
+
+type DatePickerProps = {
+  setBooking: Dispatch<SetStateAction<Booking>>;
+  blockedDates: Date[];
+};
+
+const css = `
+  .order-calendar {
+    --rdp-accent-color: #171717;
+    --rdp-today-color: #171717;
+    margin: 0;
+  }
+
+  .order-calendar .rdp-months {
+    max-width: 100%;
+  }
+
+  .order-calendar .rdp-month {
+    width: 100%;
+  }
+
+  .order-calendar .rdp-month_grid {
+    width: 100%;
+  }
+
+  .order-calendar .rdp-caption_label {
+    font-size: 0.95rem;
+    font-weight: 650;
+  }
+
+  .order-calendar .rdp-weekday {
+    color: #737373;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .order-calendar .rdp-day_button {
+    border-radius: 0.375rem;
+  }
+
+  .order-calendar .rdp-selected .rdp-day_button {
+    background: #171717;
+    border-color: #171717;
+    color: #ffe44c;
+  }
+
+  .order-calendar .my-disabled .rdp-day_button,
+  .order-calendar .rdp-disabled .rdp-day_button {
+    color: #b3b3b3;
+    text-decoration: line-through;
+  }
+`;
+
+export const DatePicker = ({ setBooking, blockedDates }: DatePickerProps) => {
+  const [selected, setSelected] = useState<Date | undefined>();
+
+  useEffect(() => {
+    setBooking((prev) => ({ ...prev, pickupDate: selected ?? null }));
+  }, [selected, setBooking]);
+
+  return (
+    <section className="space-y-4">
+      <style>{css}</style>
+      <div>
+        <p className="text-sm font-semibold text-neutral-950">
+          Termin odbioru
+        </p>
+        <p className="mt-1 text-sm text-neutral-500">
+          Niedostępne dni są wyszarzone i przekreślone.
+        </p>
+      </div>
+
+      <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-3 sm:p-4">
+        <DayPicker
+          className="order-calendar"
+          disabled={blockedDates}
+          mode="single"
+          onSelect={setSelected}
+          selected={selected}
+          modifiersClassNames={{
+            disabled: "my-disabled",
+          }}
+        />
+      </div>
+    </section>
+  );
 };

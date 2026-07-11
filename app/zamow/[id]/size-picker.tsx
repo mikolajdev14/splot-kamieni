@@ -1,8 +1,14 @@
 "use client";
-import type { Dispatch, SetStateAction } from "react";
-import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
+import { useEffect, useState } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Booking } from "./page";
+import type { Booking } from "./page";
+
+type RugSize = {
+  id: number;
+  label: string;
+  price_cents: number | string;
+};
 
 type SizePickerProps = {
   id: string;
@@ -11,8 +17,7 @@ type SizePickerProps = {
 };
 
 export const SizePicker = ({ id, booking, setBooking }: SizePickerProps) => {
-  const [sizes, setSizes] = useState<{ rug_sizes: any[] } | null>(null);
-  const [pickedSize, setPickedSize] = useState<number | null>(null);
+  const [sizes, setSizes] = useState<{ rug_sizes: RugSize[] } | null>(null);
 
   useEffect(() => {
     const fetchSizes = async () => {
@@ -23,36 +28,48 @@ export const SizePicker = ({ id, booking, setBooking }: SizePickerProps) => {
         .eq("id", id)
         .single();
       setSizes(data);
-      console.log("data: ", data?.rug_sizes, "error: ", error);
+      if (error) {
+        console.error("Nie udało się pobrać rozmiarów:", error);
+      }
     };
     fetchSizes();
   }, [id]);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const sizeId = Number(e.target.value);
-    setPickedSize(sizeId);
     setBooking((prev) => ({
       ...prev,
       pickedSize: sizeId,
     }));
   };
 
-  console.log(sizes);
   return (
-    <div>
+    <section className="space-y-4">
+      <div>
+        <p className="text-sm font-semibold text-neutral-950">Rozmiar</p>
+        <p className="mt-1 text-sm text-neutral-500">
+          Wybierz wariant najlepiej dopasowany do projektu.
+        </p>
+      </div>
+
       <select
+        value={booking.pickedSize ?? ""}
         onChange={(e) => {
           handleChange(e);
         }}
         name="size"
-        id=""
+        id="size"
+        className="h-11 w-full rounded-md border border-neutral-300 bg-white px-3 text-sm font-medium text-neutral-950 outline-none transition-colors hover:border-neutral-400 focus:border-neutral-950 focus:ring-2 focus:ring-neutral-950/10"
       >
+        <option value="" disabled>
+          Wybierz rozmiar
+        </option>
         {sizes?.rug_sizes.map((size) => (
           <option key={size.id} value={size.id}>
-            {size.label} - {Number(size.price_cents) / 100}zł
+            {size.label} - {Number(size.price_cents) / 100} zł
           </option>
         ))}
       </select>
-    </div>
+    </section>
   );
 };
