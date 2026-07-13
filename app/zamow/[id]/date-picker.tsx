@@ -69,7 +69,7 @@ export const DatePicker = ({ setBooking, blockedDates }: DatePickerProps) => {
       <style>{css}</style>
       <div>
         <p className="text-sm font-semibold text-neutral-950">
-          Termin odbioru
+          Termin realizacji
         </p>
         <p className="mt-1 text-sm text-neutral-500">
           Niedostępne dni są wyszarzone i przekreślone.

@@ -3,10 +3,14 @@
 import { FormEvent, use, useEffect, useState } from "react";
 import { SizePicker } from "./size-picker";
 import { DatePicker } from "./date-picker";
+import { DeliveryPicker } from "./delivery-picker";
+import { ReferenceImageUpload } from "./reference-image-upload";
 import { CustomerForm } from "./customer-form";
 import { createClient } from "@/lib/supabase/client";
 import { bookingSchema } from "@/schema/booking";
-import { createCheckoutSession } from "./actions";
+import { createCheckoutSession, uploadReferenceImage } from "./actions";
+
+export type DeliveryMethod = "parcel_locker" | "courier";
 
 export type Booking = {
   rugTypeId: string;
@@ -16,6 +20,9 @@ export type Booking = {
   customerEmail: string;
   customerPhone: string;
   customerNotes: string;
+  deliveryMethod: DeliveryMethod | "";
+  parcelLockerCode: string;
+  deliveryAddress: string;
 };
 
 export default function ProductPage({
@@ -28,6 +35,8 @@ export default function ProductPage({
   const [submitMessage, setSubmitMessage] = useState<string | undefined>(
     undefined,
   );
+  const [referenceImage, setReferenceImage] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [booking, setBooking] = useState<Booking>({
     rugTypeId: id,
     pickedSize: null,
@@ -36,6 +45,9 @@ export default function ProductPage({
     customerEmail: "",
     customerPhone: "",
     customerNotes: "",
+    deliveryMethod: "",
+    parcelLockerCode: "",
+    deliveryAddress: "",
   });
 
   useEffect(() => {
@@ -61,19 +73,62 @@ export default function ProductPage({
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await createCheckoutSession({
-      ...booking,
-      pickupDate: booking.pickupDate?.toISOString() ?? "",
-    });
-
-    if (!response.success) {
-      setSubmitMessage(response.message);
+    if (isSubmitting) {
       return;
     }
 
-    window.location.href = response.checkoutUrl!;
+    const bookingInput = {
+      ...booking,
+      pickupDate: booking.pickupDate?.toISOString() ?? "",
+      referenceImagePath: undefined,
+    };
 
-    setSubmitMessage("Dane są gotowe");
+    const validation = bookingSchema.safeParse(bookingInput);
+
+    if (!validation.success) {
+      setSubmitMessage(
+        validation.error.issues[0]?.message ?? "Nieprawidłowe dane.",
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage(
+      referenceImage ? "Przygotowuję zdjęcie i płatność..." : "Przygotowuję płatność...",
+    );
+
+    try {
+      let referenceImagePath: string | undefined;
+
+      if (referenceImage) {
+        const uploadResponse = await uploadReferenceImage(referenceImage);
+
+        if (!uploadResponse.success) {
+          setSubmitMessage(uploadResponse.message);
+          setIsSubmitting(false);
+          return;
+        }
+
+        referenceImagePath = uploadResponse.path;
+      }
+
+      const response = await createCheckoutSession({
+        ...bookingInput,
+        referenceImagePath,
+      });
+
+      if (!response.success) {
+        setSubmitMessage(response.message);
+        setIsSubmitting(false);
+        return;
+      }
+
+      window.location.href = response.checkoutUrl!;
+    } catch (error) {
+      console.error("Nie udało się przygotować zamówienia:", error);
+      setSubmitMessage("Nie udało się przygotować zamówienia. Spróbuj ponownie.");
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -87,8 +142,8 @@ export default function ProductPage({
             Skonfiguruj swój dywan
           </h1>
           <p className="mt-4 text-sm leading-6 text-neutral-600">
-            Wybierz rozmiar, dogodny termin odbioru i zostaw dane kontaktowe. Po
-            weryfikacji szczegółów otrzymasz potwierdzenie realizacji.
+            Wybierz rozmiar, dogodny termin realizacji i zostaw dane kontaktowe.
+            Następnie wybierzesz sposób dostawy i opłacisz zamówienie.
           </p>
 
           <div className="mt-8 space-y-4 border-t border-neutral-200 pt-6">
@@ -105,7 +160,7 @@ export default function ProductPage({
                 Następny krok
               </span>
               <p className="mt-1 text-sm text-neutral-600">
-                Uzupełnij dane w formularzu po prawej stronie.
+                Uzupełnij dane, wybierz dostawę i przejdź do płatności.
               </p>
             </div>
           </div>
@@ -118,6 +173,11 @@ export default function ProductPage({
           <div className="grid gap-8">
             <SizePicker id={id} booking={booking} setBooking={setBooking} />
             <DatePicker blockedDates={blockedDays} setBooking={setBooking} />
+            <DeliveryPicker booking={booking} setBooking={setBooking} />
+            <ReferenceImageUpload
+              file={referenceImage}
+              setFile={setReferenceImage}
+            />
             <CustomerForm booking={booking} setBooking={setBooking} />
           </div>
 
@@ -133,9 +193,10 @@ export default function ProductPage({
             )}
             <button
               type="submit"
+              disabled={isSubmitting}
               className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-950 px-6 text-sm font-semibold text-[#ffe44c] transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
             >
-              Zapłać i zarezerwuj
+              {isSubmitting ? "Przygotowywanie..." : "Zapłać i zarezerwuj"}
             </button>
           </div>
         </form>
