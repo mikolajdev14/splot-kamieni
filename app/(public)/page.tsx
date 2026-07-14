@@ -1,149 +1,256 @@
-"use client";
-
-import ColorBends from "@/components/ColorBends";
-import OrbitImages from "@/components/OrbitImages";
-import FloatingLines from "@/components/FloatingLines";
-import Link from "next/link";
+import { ArrowRight, Camera, Check, PackageCheck, Ruler, Sparkles } from "lucide-react";
 import Image from "next/image";
-import porsheGradient from "@/public/porshe-gradient.png";
-import { motion } from "motion/react";
-export default function HomePage() {
-  const images = [
-    porsheGradient.src,
-    porsheGradient.src,
-    porsheGradient.src,
-    porsheGradient.src,
-  ];
+import Link from "next/link";
+import heroImage from "@/public/porshe z tlem.png";
+import rugCutout from "@/public/porshe-gradient.png";
 
+const steps = [
+  {
+    number: "01",
+    icon: Ruler,
+    title: "Wybierasz wariant",
+    description: "Wskaż typ dywanu, rozmiar i dogodny termin realizacji.",
+  },
+  {
+    number: "02",
+    icon: Camera,
+    title: "Dodajesz inspirację",
+    description: "Możesz przesłać zdjęcie przedmiotu, który mam odwzorować.",
+  },
+  {
+    number: "03",
+    icon: PackageCheck,
+    title: "Opłacasz zamówienie",
+    description: "Wybierasz dostawę przez InPost lub kuriera i płacisz online.",
+  },
+];
+
+const benefits = [
+  "Projekt na podstawie Twojego pomysłu",
+  "Ręczne wykonanie z dbałością o szczegóły",
+  "Dostawa do paczkomatu InPost albo kurierem",
+];
+
+export default function HomePage() {
   return (
-    <div className="overflow-x-hidden">
-      <section className="relative min-h-screen overflow-hidden bg-[#050505]">
-        <FloatingLines
-          enabledWaves={["top", "middle", "bottom"]}
-          // Array - specify line count per wave; Number - same count for all waves
-          lineCount={[30]}
-          // Array - specify line distance per wave; Number - same distance for all waves
-          lineDistance={[31]}
-          bendRadius={5.5}
-          bendStrength={-0.5}
-          interactive
-          parallax={true}
-          animationSpeed={1}
-          linesGradient={["#ffe44c", "#fcd202", "#ffffff"]}
-        />
-        <nav className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-8 py-6 lg:px-14">
+    <div className="overflow-x-hidden bg-neutral-50 text-neutral-950">
+      <header className="border-b border-neutral-200 bg-neutral-50">
+        <nav className="mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between gap-6 px-5 sm:px-8 lg:px-10">
           <Link
             href="/"
-            className="font-lobster text-3xl text-neutral-900 drop-shadow-sm transition-transform hover:scale-105"
+            className="font-lobster text-3xl text-neutral-950 transition-opacity hover:opacity-70"
           >
             Carpetiem
           </Link>
 
-          <ul className="hidden items-center gap-10 md:flex">
-            {[
-              { label: "O mnie", href: "#o-mnie" },
-              { label: "Moje projekty", href: "#projekty" },
-            ].map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  className="group relative text-l font-medium tracking-wide text-neutral-900/80 transition-colors hover:text-neutral-900"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 bg-neutral-900 transition-all duration-300 group-hover:w-full" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden items-center gap-8 text-sm font-medium text-neutral-600 md:flex">
+            <Link className="transition-colors hover:text-neutral-950" href="#jak-to-dziala">
+              Jak to działa
+            </Link>
+            <Link className="transition-colors hover:text-neutral-950" href="#inspiracja">
+              Inspiracja
+            </Link>
+          </div>
 
           <Link
             href="/zamow"
-            className="rounded-full bg-neutral-900 px-7 py-2.5 text-sm font-semibold text-[#fcd202] shadow-lg shadow-black/20 transition-all hover:scale-105 hover:bg-neutral-800"
+            className="inline-flex h-10 items-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-semibold text-[#ffe44c] transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
           >
-            Zamów
+            Zamów dywan
+            <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </nav>
+      </header>
 
-        <div className="pointer-events-none absolute inset-0 z-10 select-none">
-          <motion.span
-            initial={{ x: -120, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="absolute left-[5%] top-[10%] font-lobster text-7xl text-neutral-900 drop-shadow-md md:text-8xl"
-          >
-            Cześć,
-          </motion.span>
+      <main>
+        <section className="bg-neutral-950 text-white">
+          <div className="mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-6xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:px-10 lg:py-16">
+            <div className="order-1 lg:order-2">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#d8a900] ring-1 ring-white/10">
+                <Image
+                  src={heroImage}
+                  alt="Ręcznie wykonany dywan przedstawiający sportowy samochód"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-md bg-neutral-950/90 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm">
+                  <Sparkles size={14} className="text-[#ffe44c]" aria-hidden="true" />
+                  Wykonane ręcznie
+                </div>
+              </div>
+            </div>
 
-          <motion.span
-            initial={{ x: -120, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
-            className="absolute left-[8%] top-[24%] text-2xl font-light tracking-[0.3em] text-neutral-900/70 uppercase md:text-3xl"
-          >
-            jestem
-          </motion.span>
+            <div className="order-2 max-w-xl lg:order-1">
+              <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#ffe44c]">
+                Dywany na zamówienie
+              </p>
+              <h1 className="mt-5 max-w-lg text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+                Twój pomysł. Mój warsztat.
+              </h1>
+              <p className="mt-6 max-w-lg text-base leading-7 text-neutral-300 sm:text-lg">
+                Tworzę ręcznie dywany inspirowane tym, co jest dla Ciebie ważne.
+                Prześlij zdjęcie, wybierz wariant i zamów swój unikalny projekt
+                online.
+              </p>
 
-          <motion.span
-            initial={{ x: -120, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            className="absolute left-[6%] top-[32%] -rotate-3 font-lobster text-8xl text-neutral-900 drop-shadow-lg md:text-[9rem]"
-          >
-            Daria
-          </motion.span>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/zamow"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#ffe44c] px-5 text-sm font-bold text-neutral-950 transition-colors hover:bg-[#f5d62c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffe44c]"
+                >
+                  Wybierz swój dywan
+                  <ArrowRight size={17} aria-hidden="true" />
+                </Link>
+                <Link
+                  href="#jak-to-dziala"
+                  className="inline-flex h-12 items-center justify-center rounded-md border border-white/25 px-5 text-sm font-semibold text-white transition-colors hover:border-white/60 hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Zobacz, jak to działa
+                </Link>
+              </div>
 
-          <motion.span
-            initial={{ x: -120, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="absolute left-[10%] top-[50%] max-w-xs text-lg leading-snug font-medium text-neutral-900/80 md:text-xl"
-          >
-            z wielką chęcią wykonam
-            <br />
-            dla Ciebie
-          </motion.span>
+              <div className="mt-10 grid max-w-lg grid-cols-3 border-t border-white/15 pt-5">
+                <div className="pr-3">
+                  <p className="text-lg font-semibold text-white">1:1</p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-400">Twój projekt</p>
+                </div>
+                <div className="border-l border-white/15 px-3">
+                  <p className="text-lg font-semibold text-white">Online</p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-400">Proste zamówienie</p>
+                </div>
+                <div className="border-l border-white/15 pl-3">
+                  <p className="text-lg font-semibold text-white">InPost</p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-400">Wygodna dostawa</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="jak-to-dziala" className="scroll-mt-16 bg-[#ffe44c]">
+          <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-neutral-700">
+                Prosty proces
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl">
+                Od inspiracji do gotowego dywanu.
+              </h2>
+              <p className="mt-4 text-base leading-7 text-neutral-800">
+                Wszystkie najważniejsze informacje podajesz w jednym formularzu,
+                a rezerwacja realizacji następuje po bezpiecznej płatności online.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-0 border-t border-neutral-950/20 md:grid-cols-3">
+              {steps.map((step) => {
+                const Icon = step.icon;
+
+                return (
+                  <article
+                    key={step.number}
+                    className="border-b border-neutral-950/20 py-7 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+                  >
+                    <div className="flex items-center justify-between">
+                      <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+                      <span className="font-syne text-xs text-neutral-700">{step.number}</span>
+                    </div>
+                    <h3 className="mt-8 text-xl font-semibold text-neutral-950">{step.title}</h3>
+                    <p className="mt-3 max-w-xs text-sm leading-6 text-neutral-800">
+                      {step.description}
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="inspiracja" className="scroll-mt-16 bg-neutral-50">
+          <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-10">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-neutral-500">
+                Zaczyna się od Ciebie
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl">
+                Wybierz temat, który chcesz mieć zawsze pod nogami.
+              </h2>
+              <p className="mt-5 text-base leading-7 text-neutral-600">
+                Samochód, zwierzak, logo, ulubiony symbol albo prezent dla kogoś
+                bliskiego. Zdjęcie referencyjne pomaga uchwycić to, co ma być
+                najważniejsze w projekcie.
+              </p>
+
+              <ul className="mt-7 space-y-4">
+                {benefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-3 text-sm leading-6 text-neutral-700">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-neutral-950 text-[#ffe44c]">
+                      <Check size={13} strokeWidth={3} aria-hidden="true" />
+                    </span>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/zamow"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4 transition-colors hover:decoration-neutral-950"
+              >
+                Przejdź do zamówienia
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="relative overflow-hidden rounded-lg bg-neutral-950 p-5 sm:p-8">
+              <div className="flex min-h-[280px] items-center justify-center sm:min-h-[380px]">
+                <Image
+                  src={rugCutout}
+                  alt="Przykład dywanu wykonanego na zamówienie"
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+              <div className="flex items-center justify-between border-t border-white/15 pt-4 text-xs text-neutral-400">
+                <span>Przykład realizacji</span>
+                <span className="text-[#ffe44c]">Carpetiem</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-neutral-950 text-white">
+          <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_auto] lg:items-end lg:px-10">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#ffe44c]">
+                Zróbmy coś Twojego
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Gotowy na własny projekt?
+              </h2>
+              <p className="mt-4 text-base leading-7 text-neutral-300">
+                Wybierz dostępny wariant, określ szczegóły i opłać zamówienie.
+                Resztą zajmę się w pracowni.
+              </p>
+            </div>
+            <Link
+              href="/zamow"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#ffe44c] px-5 text-sm font-bold text-neutral-950 transition-colors hover:bg-[#f5d62c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffe44c]"
+            >
+              Zamów swój dywan
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-neutral-950 px-5 pb-8 text-neutral-400 sm:px-8 lg:px-10">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 border-t border-white/15 pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+          <span className="font-lobster text-xl text-white">Carpetiem</span>
+          <span>Dywany tworzone z pomysłu.</span>
         </div>
-
-        <motion.div
-          initial={{ x: 200, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.75 }}
-          className="absolute top-1/2 left-[60%] z-20 -translate-x-1/2 -translate-y-1/2 w-[2000px] h-300"
-        >
-          <Image
-            height={1200}
-            width={2000}
-            alt="Porsche z dywanem Carpetiem"
-            src={porsheGradient}
-            priority
-          />
-        </motion.div>
-
-        <motion.span
-          initial={{ x: -120, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.75 }}
-          className="pointer-events-none absolute top-[60%] left-[4%] z-30 -rotate-3 font-lobster text-8xl text-white [text-shadow:0_2px_4px_rgb(0_0_0/45%),0_8px_24px_rgb(0_0_0/55%)] md:text-[10rem]"
-        >
-          Dywanik!
-        </motion.span>
-      </section>
-      <section className="relative min-h-screen overflow-hidden bg-white">
-        <motion.div
-          initial={{ y: -700, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="absolute top-1/3 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 w-full"
-        ></motion.div>
-        {/* geleria przykladowych dywanow */}
-      </section>
-      <section className="relative min-h-screen overflow-hidden bg-[#ffe44c]">
-        {/* SPOSOB REALIZACJI */}
-      </section>
-      <section className="relative min-h-screen overflow-hidden bg-white">
-        {/* kontakt - email, telefon itp*/}
-      </section>
+      </footer>
     </div>
   );
 }

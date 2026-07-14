@@ -1,5 +1,5 @@
 import { stripe } from "@/lib/stripe";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { fulfillCheckout } from "@/lib/fulfill-checkout";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
@@ -7,56 +7,42 @@ import type Stripe from "stripe";
 export async function POST(request: Request) {
   const body = await request.text();
   const signature = (await headers()).get("stripe-signature");
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   if (!signature) {
     return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
 
+  if (!webhookSecret || !webhookSecret.startsWith("whsec_")) {
+    console.error(
+      "Nieprawidłowy STRIPE_WEBHOOK_SECRET. Sekret webhooka powinien zaczynać się od whsec_.",
+    );
+    return NextResponse.json(
+      { error: "Webhook secret is not configured" },
+      { status: 500 },
+    );
+  }
+
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
-    );
-  } catch {
+    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+  } catch (error) {
+    console.error("Nieprawidłowy podpis webhooka Stripe:", error);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
+  if (
+    event.type === "checkout.session.completed" ||
+    event.type === "checkout.session.async_payment_succeeded"
+  ) {
     const session = event.data.object;
-    const supabase = createAdminClient();
 
-    const { error } = await supabase.from("bookings").insert({
-      rug_type_id: Number(session.metadata?.rugTypeId),
-      rug_size_id: Number(session.metadata?.pickedSize),
-      rug_type_name: session.metadata?.rugTypeName,
-      rug_size_label: session.metadata?.rugSizeLabel,
-      price_cents: session.amount_total,
-      customer_name: session.metadata?.customerName,
-      customer_email: session.customer_email,
-      customer_phone: session.metadata?.customerPhone,
-      notes: session.metadata?.customerNotes,
-      delivery_method: session.metadata?.deliveryMethod,
-      parcel_locker_code: session.metadata?.parcelLockerCode,
-      delivery_address: session.metadata?.deliveryAddress,
-      reference_image_path: session.metadata?.referenceImagePath || null,
-      booking_date: session.metadata?.pickupDate?.slice(0, 10),
-      status: "paid",
-      stripe_session_id: session.id,
-      stripe_payment_intent_id:
-        typeof session.payment_intent === "string"
-          ? session.payment_intent
-          : session.payment_intent?.id,
-      expires_at: new Date(session.expires_at * 1000).toISOString(),
-      updated_at: new Date().toISOString(),
-    });
+    const result = await fulfillCheckout(session.id);
 
-    if (error) {
-      console.error("Nie udało się zapisać rezerwacji:", error);
+    if (!result.success && result.reason !== "not_paid") {
       return NextResponse.json(
-        { error: "Failed to create booking" },
+        { error: result.message },
         { status: 500 },
       );
     }

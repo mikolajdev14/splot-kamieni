@@ -94,7 +94,9 @@ export default function ProductPage({
 
     setIsSubmitting(true);
     setSubmitMessage(
-      referenceImage ? "Przygotowuję zdjęcie i płatność..." : "Przygotowuję płatność...",
+      referenceImage
+        ? "Przygotowuję zdjęcie i płatność..."
+        : "Przygotowuję płatność...",
     );
 
     try {
@@ -126,7 +128,9 @@ export default function ProductPage({
       window.location.href = response.checkoutUrl!;
     } catch (error) {
       console.error("Nie udało się przygotować zamówienia:", error);
-      setSubmitMessage("Nie udało się przygotować zamówienia. Spróbuj ponownie.");
+      setSubmitMessage(
+        "Nie udało się przygotować zamówienia. Spróbuj ponownie.",
+      );
       setIsSubmitting(false);
     }
   };
