@@ -52,7 +52,7 @@ export default async function SuccessPage({
           {result.success
             ? "Płatność została potwierdzona, a zamówienie zapisane. Szczegóły realizacji są już dostępne w panelu administracyjnym."
             : isPending
-              ? "Stripe nie potwierdził jeszcze płatności. Zamówienie zostanie zapisane automatycznie po otrzymaniu potwierdzenia."
+              ? "Operator płatności nie potwierdził jeszcze transakcji. Zamówienie zostanie zapisane automatycznie po otrzymaniu potwierdzenia."
               : "Płatność mogła zostać przyjęta, ale zapis zamówienia wymaga sprawdzenia. Zachowaj identyfikator sesji widoczny poniżej."}
         </p>
 
@@ -65,13 +65,13 @@ export default async function SuccessPage({
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/"
-            className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-950 px-5 text-sm font-semibold text-[#ffe44c] transition-colors hover:bg-neutral-800"
+            className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-950 px-5 text-sm font-semibold text-brand transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
           >
             Wróć na stronę główną
           </Link>
           <Link
             href="/zamow"
-            className="inline-flex h-11 items-center justify-center rounded-md border border-neutral-300 px-5 text-sm font-semibold text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950"
+            className="inline-flex h-11 items-center justify-center rounded-md border border-neutral-300 px-5 text-sm font-semibold text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
           >
             Zobacz warianty
           </Link>

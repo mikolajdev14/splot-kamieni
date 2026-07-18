@@ -128,7 +128,7 @@ const parseDateKey = (date: string) => {
 const getStatusLabel = (status: string) => statusLabels[status] ?? status;
 
 const getDeliveryLabel = (method: string | null) => {
-  if (method === "parcel_locker") return "Paczkomat InPost";
+  if (method === "parcel_locker") return "Punkt odbioru";
   if (method === "courier") return "Kurier";
   return "Brak danych";
 };
@@ -372,7 +372,7 @@ export default function AdminDashboardClient({
           font-size: 0.8rem;
         }
         .admin-calendar .rdp-today:not(.blocked) .rdp-day_button {
-          background: #ffe44c;
+          background: var(--brand);
         }
         .admin-calendar .blocked .rdp-day_button {
           background: #0a0a0a;
@@ -708,7 +708,7 @@ export default function AdminDashboardClient({
                           onClick={() =>
                             handleToggleBlockedDate(parseDateKey(date))
                           }
-                          className="rounded px-1.5 py-1 text-[11px] font-semibold text-neutral-950 hover:bg-[#ffe44c] disabled:opacity-50"
+                          className="rounded px-1.5 py-1 text-[11px] font-semibold text-neutral-950 hover:bg-brand disabled:opacity-50"
                         >
                           Odblokuj
                         </button>
@@ -757,9 +757,9 @@ function StatCard({
 }) {
   const toneClass = {
     neutral: "bg-[#f5f5f5] text-[#525252]",
-    rose: "bg-[#ffe44c] text-neutral-950",
+    rose: "bg-brand text-neutral-950",
     green: "bg-[#e4f4eb] text-[#287653]",
-    yellow: "bg-neutral-950 text-[#ffe44c]",
+    yellow: "bg-neutral-950 text-brand",
   }[tone];
 
   return (
@@ -800,12 +800,12 @@ function FilterTab({
     >
       {label}
       <span
-        className={`rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-[#ffe44c]" : "bg-[#f5f5f5]"}`}
+        className={`rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-brand" : "bg-neutral-100"}`}
       >
         {count}
       </span>
       {active ? (
-        <span className="absolute inset-x-2 bottom-0 h-0.5 bg-[#ffe44c]" />
+        <span className="absolute inset-x-2 bottom-0 h-0.5 bg-brand" />
       ) : null}
     </button>
   );
@@ -1009,7 +1009,7 @@ function BookingDrawer({
               {booking.deliveryMethod === "parcel_locker" ? (
                 <DetailRow
                   icon={MapPin}
-                  label="Paczkomat InPost"
+                  label="Punkt odbioru"
                   value={booking.parcelLockerCode || "Brak danych"}
                 />
               ) : null}
@@ -1078,7 +1078,7 @@ function BookingDrawer({
               />
               <DetailRow
                 icon={CircleDollarSign}
-                label="Stripe session ID"
+                label="Identyfikator sesji płatności"
                 value={booking.stripeSessionId || "Brak danych"}
                 mono
               />

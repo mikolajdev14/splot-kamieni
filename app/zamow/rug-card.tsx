@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import porshe from "@/public/porshe-gradient.png";
+import rugCollection from "@/public/rug-studio-collection.webp";
 
 interface RugProps {
   id: number | string;
@@ -19,11 +19,11 @@ export const RugCard = (props: RugProps) => {
         <Image
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          src={porshe}
-          alt={props.name}
+          src={rugCollection}
+          alt={`Przykładowa kolekcja dywanów dla wariantu ${props.name}`}
           className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />
-        <div className="absolute left-3 top-3 rounded-md bg-neutral-950 px-2.5 py-1 text-xs font-semibold text-[#ffe44c]">
+        <div className="absolute left-3 top-3 rounded-md bg-neutral-950 px-2.5 py-1 text-xs font-semibold text-brand">
           {props.leadDays} dni realizacji
         </div>
       </div>

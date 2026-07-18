@@ -116,9 +116,9 @@ export default async function AdminDashboardPage() {
       <div className="min-h-screen lg:grid lg:grid-cols-[224px_minmax(0,1fr)]">
         <aside className="hidden border-r border-[#e5e5e5] bg-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col">
           <div className="border-b border-[#e5e5e5] px-6 py-6">
-            <p className="font-lobster text-2xl text-neutral-950">Carpetiem</p>
+            <p className="text-xl font-bold tracking-tight text-neutral-950">Rug Studio</p>
             <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#737373]">
-              Studio dywanów
+              Portfolio demo
             </p>
           </div>
 
@@ -128,7 +128,7 @@ export default async function AdminDashboardPage() {
           >
             <a
               href="#overview"
-              className="flex h-10 items-center gap-3 rounded-md bg-[#ffe44c] px-3 text-sm font-semibold text-neutral-950"
+              className="flex h-10 items-center gap-3 rounded-md bg-brand px-3 text-sm font-semibold text-neutral-950"
             >
               <LayoutDashboard size={17} aria-hidden="true" />
               Pulpit
@@ -179,8 +179,8 @@ export default async function AdminDashboardPage() {
             <div className="flex min-h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-3">
                 <div className="lg:hidden">
-                  <p className="font-lobster text-xl text-neutral-950">
-                    Carpetiem
+                  <p className="text-lg font-bold tracking-tight text-neutral-950">
+                    Rug Studio
                   </p>
                 </div>
                 <div className="hidden lg:block">
@@ -208,7 +208,7 @@ export default async function AdminDashboardPage() {
             >
               <a
                 href="#overview"
-                className="whitespace-nowrap rounded-md bg-[#ffe44c] px-3 py-1.5 text-xs font-semibold text-neutral-950"
+                className="whitespace-nowrap rounded-md bg-brand px-3 py-1.5 text-xs font-semibold text-neutral-950"
               >
                 Pulpit
               </a>

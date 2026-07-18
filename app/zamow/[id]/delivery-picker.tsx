@@ -15,8 +15,8 @@ const options: Array<{
 }> = [
   {
     value: "parcel_locker",
-    title: "Paczkomat InPost",
-    description: "Odbiór w wybranym paczkomacie InPost",
+    title: "Punkt odbioru",
+    description: "Odbiór w wybranym automacie paczkowym",
   },
   {
     value: "courier",
@@ -77,7 +77,7 @@ export const DeliveryPicker = ({
       {booking.deliveryMethod === "parcel_locker" ? (
         <label className="block space-y-2">
           <span className="text-sm font-medium text-neutral-700">
-            Kod paczkomatu InPost *
+            Kod punktu odbioru *
           </span>
           <input
             value={booking.parcelLockerCode}

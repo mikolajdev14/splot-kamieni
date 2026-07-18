@@ -11,10 +11,10 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <p className="text-stone-400 text-sm tracking-widest uppercase">
-            Pracownia
+            Rug Studio · demo
           </p>
           <h1 className="text-3xl font-semibold text-stone-800 mt-1">
-            Panel admina
+            Panel projektu
           </h1>
         </div>
 
@@ -32,7 +32,7 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                placeholder="admin@pracownia.pl"
+                placeholder="admin@rug-studio.demo"
                 className="w-full rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-stone-800 placeholder:text-stone-300 outline-none focus:border-stone-400 focus:bg-white transition-colors"
               />
             </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Syne_Mono, Lobster } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Syne_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -9,12 +9,6 @@ const syneMono = Syne_Mono({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-syne-mono",
-});
-
-const lobster = Lobster({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-lobster",
 });
 
 const geistSans = Geist({
@@ -28,8 +22,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Carpetiem | Dywany na zamówienie",
-  description: "Ręcznie wykonane dywany tworzone na podstawie Twojego pomysłu.",
+  title: "Rug Studio | Portfolio demo",
+  description:
+    "Demonstracyjny projekt sklepu z konfiguracją ręcznie tuftowanych dywanów.",
 };
 
 export default function RootLayout({
@@ -48,7 +43,6 @@ export default function RootLayout({
         "font-sans",
         inter.variable,
         syneMono.variable,
-        lobster.variable,
       )}
     >
       <body className="min-h-full font-syne flex flex-col">{children}</body>

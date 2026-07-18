@@ -13,14 +13,14 @@ export default async function ZamowPage() {
       <section className="mx-auto w-full max-w-6xl px-5 py-8 sm:px-8 lg:px-10 lg:py-12">
         <div className="max-w-2xl">
           <p className="text-sm font-medium uppercase tracking-wide text-neutral-500">
-            Zamówienie
+            Rug Studio · portfolio demo
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl">
             Wybierz typ dywanu
           </h1>
           <p className="mt-4 text-sm leading-6 text-neutral-600">
-            Przejrzyj dostępne warianty i wybierz bazę projektu. Szczegóły
-            rozmiaru oraz termin odbioru ustawisz w kolejnym kroku.
+            Przejrzyj przykładowe warianty i wybierz bazę projektu. Rozmiar,
+            termin i materiał referencyjny ustawisz w kolejnym kroku demo.
           </p>
         </div>
 

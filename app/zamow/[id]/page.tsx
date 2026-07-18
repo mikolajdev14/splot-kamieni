@@ -167,7 +167,7 @@ export default function ProductPage({
 
   const selectedDelivery =
     booking.deliveryMethod === "parcel_locker"
-      ? "Paczkomat InPost"
+      ? "Punkt odbioru"
       : booking.deliveryMethod === "courier"
         ? "Kurier"
         : "Nie wybrano";
@@ -176,8 +176,11 @@ export default function ProductPage({
     <main className="min-h-screen bg-neutral-50 text-neutral-950">
       <header className="border-b border-neutral-200 bg-neutral-50">
         <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
-          <Link href="/" className="font-lobster text-2xl text-neutral-950">
-            Carpetiem
+          <Link href="/" className="flex items-center gap-2 font-bold text-neutral-950">
+            <span className="flex size-8 items-center justify-center rounded-md bg-neutral-950 text-xs font-black text-brand">
+              R
+            </span>
+            Rug Studio
           </Link>
           <Link
             href="/zamow"
@@ -192,8 +195,8 @@ export default function ProductPage({
       <section className="bg-neutral-950 text-white">
         <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-5 px-5 py-7 sm:px-8 sm:py-9 lg:flex-row lg:items-end lg:px-10">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#ffe44c]">
-              Zamówienie
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">
+              Portfolio demo · konfigurator
             </p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
               Skonfiguruj swój dywan
@@ -281,14 +284,14 @@ export default function ProductPage({
               )}
               <p className="mt-2 flex items-center gap-2 text-xs text-neutral-500">
                 <ShieldCheck size={14} aria-hidden="true" />
-                Bezpieczna płatność online przez Stripe
+                Demonstracyjny przepływ płatności online
               </p>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-md bg-neutral-950 px-6 text-sm font-semibold text-[#ffe44c] transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 disabled:cursor-wait disabled:opacity-70"
+              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-md bg-neutral-950 px-6 text-sm font-semibold text-brand transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 disabled:cursor-wait disabled:opacity-70"
             >
               <CreditCard size={17} aria-hidden="true" />
               {isSubmitting ? "Przygotowywanie..." : "Zapłać i zarezerwuj"}
@@ -314,7 +317,7 @@ function FormPanel({
   return (
     <section className="rounded-lg border border-neutral-200 bg-white p-5 sm:p-6">
       <div className="mb-6 flex items-center gap-3 border-b border-neutral-200 pb-4">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#ffe44c] text-xs font-bold text-neutral-950">
+        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-neutral-950">
           {number}
         </span>
         <div>
