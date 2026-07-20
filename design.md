@@ -1,26 +1,26 @@
-# Rug Studio design direction
+# Splot Kamieni design direction
 
-source: extracted from the existing interface and refined for a portfolio demo
+source: image reference and Instagram profile supplied by the user
 
 ## Character
 
-Rug Studio is a bold editorial commerce concept. It combines gallery like product photography with a direct black, warm white, and yellow interface. The result should feel crafted, tactile, and clearly presented as a fictional portfolio project.
+Splot Kamieni is a calm editorial commerce demo for handmade natural stone jewelry. It combines generous serif headlines, tactile product photography and layered commerce cards. The result feels feminine, natural and personal. It is premium without becoming formal or inaccessible.
 
 ## Build mandate
 
-Every public screen must communicate that this is a portfolio demo, not a real company website. Lead with the rugs, use concise Polish copy, preserve the strong black and yellow contrast, and avoid references to real delivery brands or a named workshop owner.
+Every public screen should place the jewelry and the customer story first. Use warm ivory surfaces, sand, soft cocoa and restrained gold. Keep the demonstration label visible but discreet. Avoid dark luxury styling, generic marketplace layouts and technical language.
 
 ## Composition patterns
 
-Use full width dark sections for primary moments, warm neutral surfaces for product context, and yellow sections for process explanations. Keep content inside the existing centered wide containers. Pair large editorial headlines with practical microcopy and visible demo labels.
+Use wide editorial sections, asymmetrical image and copy pairs, soft overlapping cards and occasional rounded dark cocoa panels for contrast. Let product cards overlap the preceding image area on large screens. On mobile, return all layers to a clear single column.
 
 ## Component and usage rules
 
-Use compact squared cards, restrained corner rounding, thin borders, and strong text hierarchy. Product photography should have generous framing and clear alt text. Calls to action use the yellow accent on dark surfaces or dark ink on yellow surfaces. Motion stays subtle and respects reduced motion preferences.
+Cards use generous rounding, warm borders and diffuse shadows. Buttons are pill shaped, compact and clearly prioritised. Product photography uses large crops with descriptive alt text. Configuration choices behave like tactile sample cards. Motion is limited to small lifts and opacity changes.
 
 ## Responsive behavior
 
-Stack image and copy on small screens. Keep touch targets at least 44 pixels high. Allow editorial split layouts from the large breakpoint. Do not crop the main rug silhouettes on mobile.
+Stack editorial layouts below the large breakpoint. Product grids become horizontally scrollable only where they support discovery, otherwise they stack. All controls remain at least 44 pixels tall. The configurator keeps its price and next action visible near the bottom on mobile.
 
 ## Tokens
 

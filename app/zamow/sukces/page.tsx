@@ -1,82 +1,18 @@
-import { fulfillCheckout } from "@/lib/fulfill-checkout";
-import { CheckCircle2, Clock3, TriangleAlert } from "lucide-react";
+"use client";
+
+import { DemoFooter, DemoHeader } from "@/components/demo-shell";
+import { CalendarCheck, Check, PackageCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default async function SuccessPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ session_id?: string | string[] }>;
-}) {
-  const params = await searchParams;
-  const sessionId = Array.isArray(params.session_id)
-    ? params.session_id[0]
-    : params.session_id;
-  const result = sessionId
-    ? await fulfillCheckout(sessionId)
-    : {
-        success: false as const,
-        reason: "invalid_session" as const,
-        message: "Brak identyfikatora płatności.",
-      };
-
-  const isPending = !result.success && result.reason === "not_paid";
-  const Icon = result.success
-    ? CheckCircle2
-    : isPending
-      ? Clock3
-      : TriangleAlert;
-
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-neutral-50 px-5 py-12 text-neutral-950">
-      <section className="w-full max-w-lg rounded-lg border border-neutral-200 bg-white p-6 sm:p-8">
-        <span
-          className={`flex size-12 items-center justify-center rounded-md ${
-            result.success
-              ? "bg-emerald-100 text-emerald-700"
-              : isPending
-                ? "bg-amber-100 text-amber-700"
-                : "bg-red-100 text-red-700"
-          }`}
-        >
-          <Icon size={24} aria-hidden="true" />
-        </span>
-
-        <h1 className="mt-6 text-3xl font-semibold tracking-tight">
-          {result.success
-            ? "Zamówienie zostało przyjęte"
-            : isPending
-              ? "Płatność jest przetwarzana"
-              : "Nie udało się zapisać zamówienia"}
-        </h1>
-        <p className="mt-4 text-sm leading-6 text-neutral-600">
-          {result.success
-            ? "Płatność została potwierdzona, a zamówienie zapisane. Szczegóły realizacji są już dostępne w panelu administracyjnym."
-            : isPending
-              ? "Operator płatności nie potwierdził jeszcze transakcji. Zamówienie zostanie zapisane automatycznie po otrzymaniu potwierdzenia."
-              : "Płatność mogła zostać przyjęta, ale zapis zamówienia wymaga sprawdzenia. Zachowaj identyfikator sesji widoczny poniżej."}
-        </p>
-
-        {sessionId ? (
-          <p className="mt-5 break-all rounded-md bg-neutral-100 px-3 py-2 font-mono text-xs text-neutral-600">
-            {sessionId}
-          </p>
-        ) : null}
-
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/"
-            className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-950 px-5 text-sm font-semibold text-brand transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
-          >
-            Wróć na stronę główną
-          </Link>
-          <Link
-            href="/zamow"
-            className="inline-flex h-11 items-center justify-center rounded-md border border-neutral-300 px-5 text-sm font-semibold text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
-          >
-            Zobacz warianty
-          </Link>
-        </div>
-      </section>
-    </main>
-  );
+export default function SuccessPage() {
+  return <Suspense fallback={<div role="status" className="shell py-20">Przygotowuję potwierdzenie…</div>}><SuccessContent /></Suspense>;
 }
+
+function SuccessContent() {
+  const order = useSearchParams().get("order") ?? "SK-2026-0042";
+  return <div><DemoHeader compact /><main id="main-content" className="grain min-h-[75vh] py-12 sm:py-20"><div className="shell"><div className="mx-auto max-w-3xl soft-card overflow-hidden"><div className="bg-cocoa p-8 text-center text-paper sm:p-12"><span className="mx-auto flex size-16 items-center justify-center rounded-full bg-paper text-gold"><Check size={30} aria-hidden="true" /></span><p className="eyebrow mt-7">Płatność przyjęta w demo</p><h1 className="mt-3 text-5xl sm:text-6xl">Dziękujemy za zamówienie</h1><p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-paper/60">Twój projekt trafił do kolejki pracowni. Od tej chwili możesz obserwować każdy etap jego powstawania.</p></div><div className="grid gap-6 p-7 sm:grid-cols-3 sm:p-10"><Info icon={<PackageCheck />} label="Numer zamówienia" value={order} /><Info icon={<Sparkles />} label="Status" value="Opłacone" /><Info icon={<CalendarCheck />} label="Przewidywana wysyłka" value="28 lipca 2026" /></div><div className="border-t p-7 sm:p-10"><div className="rounded-2xl bg-blush p-5 text-sm"><p className="font-bold">Bransoletka z intencją</p><p className="mt-1 text-cocoa/55">Ametyst · złote dodatki · rozmiar M · opakowanie prezentowe</p></div><div className="mt-7 flex flex-col gap-3 sm:flex-row"><Link className="button-primary flex-1" href={`/sledzenie/${order}`}>Śledź zamówienie</Link><Link className="button-secondary flex-1" href="/">Wróć na stronę główną</Link></div><Link href="/admin-demo" className="mt-5 block text-center text-xs font-bold text-gold underline underline-offset-4">Pokaż zamówienie w panelu właścicielki</Link></div></div></div></main><DemoFooter /></div>;
+}
+
+function Info({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) { return <div className="text-center [&>svg]:mx-auto [&>svg]:text-gold">{icon}<p className="mt-3 text-[0.65rem] font-bold uppercase tracking-wider text-cocoa/45">{label}</p><p className="mt-1 text-sm font-bold">{value}</p></div>; }

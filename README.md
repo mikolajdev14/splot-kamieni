@@ -1,27 +1,40 @@
-# Rug Studio
+# Splot Kamieni
 
-Portfolio demo of an ecommerce experience for custom tufted rugs. The project presents a fictional brand and a complete customer flow, from catalog and product configuration to delivery, payment, and order management.
+Klikalne demo procesu zamawiania ręcznie robionej biżuterii z kamieni naturalnych. Projekt prezentuje dwie strony biznesu: mobilną ścieżkę klientki oraz panel właścicielki pracowni.
 
-## Highlights
-
-The public interface includes an editorial landing page, product catalog, configurable rug size and date, reference image upload, delivery selection, checkout, and payment result states. A separate admin area covers order and schedule management.
-
-All rug visuals in the current interface were generated specifically for this demo. They do not represent an existing company or product catalog.
-
-## Local development
+## Uruchomienie
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Aplikacja będzie dostępna pod `http://localhost:3000`.
 
-## Verification
+## Główne trasy
+
+`/` przedstawia markę, kolekcję, proces, personalizację, opinie i FAQ.
+
+`/zamow` prowadzi przez ośmiostopniowy konfigurator bransoletki z dynamiczną ceną.
+
+`/koszyk` pokazuje personalizację i obsługuje kod rabatowy `DEMO10`.
+
+`/checkout` symuluje dostawę, termin i płatność.
+
+`/zamow/sukces` oraz `/sledzenie/[id]` zamykają ścieżkę klientki.
+
+`/admin-demo` zawiera dashboard, zamówienia, kalendarz, produkty i klientki.
+
+## Dane i symulacje
+
+Dane demonstracyjne znajdują się w `lib/demo-data.ts`. Konfiguracja koszyka i nowe zamówienia są zapisywane w `localStorage`, dzięki czemu świeżo utworzone zamówienie pojawia się w panelu właścicielki także po odświeżeniu strony.
+
+Płatności, terminy, wysyłka, statusy i dane klientek są wyłącznie symulacją. Projekt nie łączy się z bramką płatności, kurierem, pocztą ani systemem magazynowym.
+
+## Kontrola jakości
 
 ```bash
+npm run typecheck
 npm run lint
 npm run build
 ```
-
-The application uses Next.js, TypeScript, Supabase, and Stripe. Environment variables are required for the connected ordering and admin flows.
