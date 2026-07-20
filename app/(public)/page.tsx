@@ -1,6 +1,6 @@
 import { DemoFooter, DemoHeader } from "@/components/demo-shell";
 import { PRODUCTS, formatPrice } from "@/lib/demo-data";
-import { ArrowRight, Gift, Heart, PackageCheck, Sparkles, WandSparkles } from "lucide-react";
+import { ArrowRight, Gem, Gift, Heart, PackageCheck, Sparkles, WandSparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -66,9 +66,17 @@ export default function HomePage() {
                 </article>
               ))}
             </div>
-            <div className="mt-20 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-              <div><p className="eyebrow">Początek Twojej historii</p><h2 className="mt-3 text-4xl font-medium sm:text-6xl">Wybierz swój <em className="font-normal text-gold">splot</em></h2></div>
-              <p className="max-w-md text-sm leading-7 text-cocoa/60">Każdy model jest punktem wyjścia. Kolor, kamień i znaczenie dobierzesz już po swojemu.</p>
+            <div className="collection-story mt-16 grid items-center gap-9 overflow-hidden p-7 sm:p-10 lg:grid-cols-[1.1fr_0.55fr_0.8fr] lg:p-14">
+              <span className="collection-number" aria-hidden="true">01</span>
+              <div className="relative z-10">
+                <p className="eyebrow">Początek Twojej historii</p>
+                <h2 className="mt-4 text-5xl font-medium leading-[0.9] sm:text-7xl">Wybierz swój <em className="font-normal text-gold">splot</em></h2>
+              </div>
+              <div className="jewel-orbit" aria-hidden="true"><span><Gem size={31} strokeWidth={1.25} /></span></div>
+              <div className="relative z-10 lg:border-l lg:border-cocoa/15 lg:pl-9">
+                <p className="text-base leading-8 text-cocoa/65">Każdy model jest punktem wyjścia. Kolor, kamień i znaczenie dobierzesz już po swojemu.</p>
+                <Link className="collection-link group mt-7" href="/zamow">Stwórz własną kompozycję <ArrowRight size={18} aria-hidden="true" /></Link>
+              </div>
             </div>
           </div>
         </section>
@@ -150,11 +158,26 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="silk-section py-14 sm:py-20">
+        <section className="silk-section pb-16 pt-8 sm:pb-24 sm:pt-12">
           <div className="shell">
-            <div className="cta-jewel flex flex-col gap-8 overflow-hidden rounded-[2.75rem] bg-cocoa p-8 text-paper sm:flex-row sm:items-center sm:justify-between sm:p-12 lg:p-16">
-              <div className="relative"><PackageCheck className="text-gold" aria-hidden="true" /><h2 className="mt-6 max-w-2xl text-4xl sm:text-6xl">Gotowa stworzyć coś <em className="font-normal text-sand">swojego?</em></h2><p className="mt-3 text-sm text-paper/60">Przejdź pełną demonstracyjną ścieżkę zamówienia.</p></div>
-              <Link href="/zamow" className="hero-button-light group shrink-0">Zacznij personalizację <ArrowRight size={17} aria-hidden="true" /></Link>
+            <div className="cta-jewel grid overflow-hidden rounded-[2.75rem] bg-cocoa text-paper lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative z-10 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
+                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-gold"><PackageCheck aria-hidden="true" /> Tworzona ręcznie dla Ciebie</div>
+                <h2 className="mt-7 max-w-2xl text-5xl leading-[0.92] sm:text-7xl">Gotowa stworzyć coś <em className="font-normal text-sand">swojego?</em></h2>
+                <p className="mt-6 max-w-lg text-base leading-7 text-paper/65">Połącz kamień, intencję i osobisty detal. Zobacz cenę od razu i przejdź całą drogę od pomysłu do gotowego prezentu.</p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <Link href="/zamow" className="hero-button-light group shrink-0">Zacznij personalizację <ArrowRight size={17} aria-hidden="true" /></Link>
+                  <span className="text-xs leading-5 text-paper/50">Konfiguracja zajmuje około 2 minut</span>
+                </div>
+              </div>
+              <div className="cta-image group relative min-h-[25rem] overflow-hidden lg:min-h-[38rem]">
+                <Image src="/jewelry/gift-set.webp" alt="Personalizowany zestaw biżuterii z kamieni naturalnych w pudełku prezentowym" fill className="object-cover transition duration-1000 group-hover:scale-[1.06]" sizes="(min-width: 1024px) 45vw, 100vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-cocoa/55 via-transparent to-cocoa/10" />
+                <div className="cta-note absolute bottom-6 left-6 right-6 flex items-center gap-4 rounded-[1.5rem] border border-paper/40 bg-paper/85 p-4 text-cocoa shadow-xl backdrop-blur-xl sm:left-auto sm:w-72">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blush text-gold"><Sparkles aria-hidden="true" /></span>
+                  <p className="text-sm leading-5"><strong className="block">Jedyny taki splot</strong><span className="text-cocoa/55">Kamienie dobrane do Twojej intencji</span></p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

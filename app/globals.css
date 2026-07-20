@@ -137,6 +137,49 @@
   transform: rotate(-8deg) scale(1.08);
 }
 
+.collection-story {
+  @apply relative rounded-[2.75rem] border border-paper/80 bg-paper/75 shadow-[0_2rem_5rem_-3rem_oklch(0.27_0.035_55_/_0.42)] backdrop-blur-xl;
+}
+
+.collection-story::before {
+  @apply pointer-events-none absolute -right-24 -top-24 size-80 rounded-full;
+  content: "";
+  background: radial-gradient(circle, oklch(0.67 0.105 72 / 0.19), transparent 68%);
+}
+
+.collection-number {
+  @apply pointer-events-none absolute -bottom-10 left-6 text-[10rem] leading-none text-cocoa/[0.035] sm:left-10 sm:text-[15rem];
+  font-family: var(--font-serif);
+}
+
+.jewel-orbit {
+  @apply relative mx-auto flex size-32 items-center justify-center rounded-full border border-gold/35 bg-ivory/55 text-gold shadow-[inset_0_0_2.5rem_oklch(0.67_0.105_72_/_0.14),0_1.25rem_3rem_-2rem_oklch(0.27_0.035_55_/_0.4)] sm:size-40;
+  transition: transform var(--duration-slow) var(--ease-out), box-shadow var(--duration-normal) ease;
+}
+
+.jewel-orbit::before,
+.jewel-orbit::after {
+  @apply pointer-events-none absolute rounded-full border border-gold/25;
+  content: "";
+}
+
+.jewel-orbit::before { @apply -inset-3; }
+.jewel-orbit::after { @apply -inset-7 border-dashed; }
+
+.jewel-orbit > span {
+  @apply flex size-16 rotate-45 items-center justify-center rounded-[1.25rem] bg-cocoa text-sand shadow-xl;
+}
+
+.jewel-orbit > span svg { transform: rotate(-45deg); }
+.collection-story:hover .jewel-orbit { box-shadow: inset 0 0 2.5rem oklch(0.67 0.105 72 / 0.22), 0 1.5rem 3rem -1.8rem oklch(0.67 0.105 72 / 0.55); transform: rotate(8deg) scale(1.03); }
+
+.collection-link {
+  @apply inline-flex min-h-11 items-center gap-3 border-b border-gold/45 text-sm font-bold text-cocoa;
+}
+
+.collection-link:hover { @apply border-gold text-gold; }
+.collection-link:hover svg { transform: translateX(5px); }
+
 .process-card {
   @apply relative min-h-72 overflow-hidden rounded-[2rem] border border-paper/80 bg-paper/75 p-7 shadow-[0_1.25rem_3rem_-2rem_oklch(0.27_0.035_55_/_0.28)] backdrop-blur-md;
   transition: color 420ms ease, background-color 420ms ease, transform 420ms var(--ease-out), box-shadow 420ms ease;
@@ -202,7 +245,17 @@
 .faq-plus { @apply flex size-9 items-center justify-center rounded-full bg-paper text-xl text-gold shadow-sm; transition: transform 350ms var(--ease-out), background-color var(--duration-fast) ease, color var(--duration-fast) ease; }
 .faq-item[open] .faq-plus { @apply bg-cocoa text-paper; transform: rotate(45deg); }
 
-.cta-jewel { position: relative; }
+.cta-jewel {
+  position: relative;
+  box-shadow: 0 2.5rem 6rem -3rem oklch(0.27 0.035 55 / 0.65);
+}
+
+.cta-jewel::before {
+  @apply pointer-events-none absolute -bottom-40 -left-28 size-96 rounded-full border border-paper/10;
+  content: "";
+  box-shadow: 0 0 0 2.5rem oklch(0.995 0.006 80 / 0.025), 0 0 0 5rem oklch(0.995 0.006 80 / 0.02);
+}
+
 .cta-jewel::after {
   position: absolute;
   top: -7rem;
@@ -214,6 +267,21 @@
   background: radial-gradient(circle, oklch(0.67 0.105 72 / 0.34), transparent 68%);
   filter: blur(6px);
   pointer-events: none;
+}
+
+.cta-image::before {
+  @apply pointer-events-none absolute inset-y-0 left-0 z-10 w-24;
+  content: "";
+  background: linear-gradient(90deg, var(--cocoa), transparent);
+}
+
+.cta-note {
+  transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) ease;
+}
+
+.cta-image:hover .cta-note {
+  box-shadow: 0 1.5rem 3rem -1.5rem oklch(0.27 0.035 55 / 0.6);
+  transform: translateY(-5px);
 }
 
 .logo-mark { transition: transform 500ms var(--ease-out), box-shadow 350ms ease; }
