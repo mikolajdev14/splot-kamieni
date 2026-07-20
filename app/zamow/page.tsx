@@ -35,10 +35,10 @@ export default function ConfiguratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="silk-page min-h-screen">
       <DemoHeader compact />
       <main id="main-content" className="pb-32">
-        <section className="border-b border-line bg-paper"><div className="shell py-8 sm:py-10"><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="eyebrow">Bransoletka z intencją</p><h1 className="mt-2 text-4xl font-medium sm:text-5xl">Stwórz swój osobisty splot</h1></div><p className="rounded-full bg-blush px-4 py-2 text-xs font-bold">Krok {step + 1} z {stepNames.length}</p></div><div className="mt-8 flex gap-2 overflow-x-auto pb-2" role="progressbar" aria-valuemin={1} aria-valuemax={stepNames.length} aria-valuenow={step + 1} aria-label="Postęp konfiguracji">{stepNames.map((name, index) => <button key={name} type="button" onClick={() => index <= step && setStep(index)} className={`min-h-11 shrink-0 rounded-full px-4 text-xs font-bold ${index === step ? "bg-cocoa text-paper" : index < step ? "bg-sand text-cocoa" : "border border-line text-cocoa/40"}`} disabled={index > step}>{index < step && <Check size={13} className="mr-1 inline" aria-hidden="true" />}{name}</button>)}</div></div></section>
+        <section className="border-b border-line bg-paper/85 backdrop-blur-xl"><div className="shell py-8 sm:py-10"><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="eyebrow">Bransoletka z intencją</p><h1 className="mt-2 text-4xl font-medium sm:text-5xl">Stwórz swój osobisty splot</h1></div><p className="rounded-full bg-blush px-4 py-2 text-xs font-bold">Krok {step + 1} z {stepNames.length}</p></div><div className="mt-8 flex gap-2 overflow-x-auto pb-2" role="progressbar" aria-valuemin={1} aria-valuemax={stepNames.length} aria-valuenow={step + 1} aria-label="Postęp konfiguracji">{stepNames.map((name, index) => <button key={name} type="button" onClick={() => index <= step && setStep(index)} className={`min-h-11 shrink-0 rounded-full px-4 text-xs font-bold hover:-translate-y-0.5 ${index === step ? "bg-cocoa text-paper" : index < step ? "bg-sand text-cocoa hover:bg-blush" : "border border-line text-cocoa/40"}`} disabled={index > step}>{index < step && <Check size={13} className="mr-1 inline" aria-hidden="true" />}{name}</button>)}</div></div></section>
 
         <div className="shell grid items-start gap-7 py-8 lg:grid-cols-[1fr_22rem]">
           <section className="soft-card overflow-hidden p-5 sm:p-8" aria-live="polite">

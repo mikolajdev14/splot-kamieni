@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Bodoni_Moda, Manrope } from "next/font/google";
 import { MotionEffects } from "@/components/motion-effects";
 import "./globals.css";
 
 const sans = Manrope({ subsets: ["latin"], variable: "--font-sans" });
-const serif = Cormorant_Garamond({
+const serif = Bodoni_Moda({
   subsets: ["latin"],
   variable: "--font-serif",
   weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {

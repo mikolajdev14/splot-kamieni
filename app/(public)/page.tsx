@@ -27,41 +27,137 @@ const faqs = [
 
 export default function HomePage() {
   return (
-    <div className="overflow-hidden">
-      <DemoHeader />
+    <div className="silk-page overflow-hidden">
+      <DemoHeader overlay />
       <main id="main-content">
-        <section className="grain relative">
-          <div className="shell grid min-h-[42rem] items-center gap-10 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-20">
-            <div className="relative z-10 max-w-2xl">
-              <p className="eyebrow">Biżuteria, która mówi o Tobie</p>
-              <h1 className="mt-5 text-5xl font-medium leading-[0.9] tracking-[-0.04em] sm:text-7xl lg:text-[5.5rem]">Biżuteria stworzona <em className="font-normal text-gold">specjalnie</em> dla Ciebie</h1>
-              <p className="mt-7 max-w-xl text-base leading-8 text-cocoa/70 sm:text-lg">Wybierz kamienie, kolory i dodatki, a my stworzymy unikalną biżuterię dopasowaną do Twojej historii, intencji lub wyjątkowej okazji.</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link className="button-primary" href="/zamow">Zaprojektuj swoją biżuterię <ArrowRight size={17} aria-hidden="true" /></Link><Link className="button-secondary" href="#kolekcja">Zobacz kolekcję</Link></div>
-              <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs font-bold uppercase tracking-[0.12em] text-cocoa/55"><span>Naturalne kamienie</span><span>Ręczne wykonanie</span><span>Osobista intencja</span></div>
-            </div>
-            <div className="relative min-h-[29rem] sm:min-h-[36rem]">
-              <div className="absolute inset-x-6 top-0 aspect-[4/3] overflow-hidden rounded-[2.5rem] bg-sand shadow-2xl sm:inset-x-0"><Image src="/jewelry/hero-bracelet.webp" alt="Bransoletka z kwarcu różowego i kamienia księżycowego na kremowej tkaninie" fill priority className="object-cover" sizes="(min-width: 1024px) 52vw, 100vw" /></div>
-              <div className="soft-card absolute bottom-3 left-0 w-56 p-5 sm:-left-8 sm:bottom-0"><div className="flex items-center justify-between"><span className="text-xs font-bold uppercase tracking-widest text-cocoa/50">Kamień miesiąca</span><Sparkles size={17} className="text-gold" aria-hidden="true" /></div><p className="mt-8 font-editorial text-3xl">Kwarc różowy</p><p className="mt-1 text-xs leading-5 text-cocoa/60">Bliskość, czułość i łagodność</p></div>
-              <div className="absolute bottom-12 right-0 rounded-full border border-paper/70 bg-cocoa px-5 py-3 text-xs font-bold text-paper shadow-xl sm:-right-5">Tworzona ręcznie</div>
+        <section className="relative flex min-h-[48rem] items-center overflow-hidden bg-cocoa text-paper sm:min-h-[54rem]">
+          <Image src="/jewelry/hero-bracelet.webp" alt="Bransoletka z kwarcu różowego i kamienia księżycowego na kremowej tkaninie" fill priority className="object-cover" sizes="100vw" />
+          <div className="absolute inset-0 bg-cocoa/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-cocoa/75 via-cocoa/20 to-cocoa/80" />
+          <div className="shell relative z-10 flex flex-col items-center pb-28 pt-32 text-center sm:pb-36">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sand">Ręcznie robiona biżuteria z kamieni naturalnych</p>
+            <h1 className="mt-7 max-w-6xl text-5xl font-medium leading-[0.86] tracking-[-0.055em] sm:text-7xl lg:text-[7rem]">Biżuteria stworzona <em className="font-normal text-sand">specjalnie dla Ciebie</em></h1>
+            <p className="mt-7 max-w-xl text-base leading-7 text-paper/75">Wybierz kamienie, kolory i dodatki. My stworzymy biżuterię dopasowaną do Twojej historii, intencji lub wyjątkowej okazji.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link className="hero-button-light group" href="/zamow">Zaprojektuj swoją biżuterię <ArrowRight size={17} aria-hidden="true" /></Link>
+              <Link className="hero-button-ghost" href="#kolekcja">Zobacz kolekcję</Link>
             </div>
           </div>
         </section>
 
-        <section id="kolekcja" className="scroll-mt-20 bg-paper py-20 sm:py-28">
-          <div className="shell"><div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"><div><p className="eyebrow">Początek Twojej historii</p><h2 className="mt-3 text-4xl font-medium sm:text-6xl">Wybierz swój <em className="font-normal text-gold">splot</em></h2></div><p className="max-w-md text-sm leading-7 text-cocoa/60">Każdy model jest punktem wyjścia. Kolor, kamień i znaczenie dobierzesz już po swojemu.</p></div>
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{PRODUCTS.map((product, index) => <article key={product.id} className={`soft-card group overflow-hidden ${index % 2 ? "lg:translate-y-8" : ""}`}><div className="relative aspect-[4/5] overflow-hidden bg-sand"><Image src={product.image} alt={product.name} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(min-width: 1024px) 25vw, 50vw" /><span className="absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur">{product.tag}</span></div><div className="p-5"><h3 className="text-2xl font-semibold leading-6">{product.name}</h3><p className="mt-3 min-h-12 text-sm leading-6 text-cocoa/60">{product.description}</p><div className="mt-5 flex items-center justify-between"><p className="text-sm">od <strong>{formatPrice(product.price)}</strong></p><Link href="/zamow" className="flex size-11 items-center justify-center rounded-full bg-cocoa text-paper" aria-label={`Personalizuj: ${product.name}`}><ArrowRight size={18} aria-hidden="true" /></Link></div></div></article>)}</div>
+        <section id="kolekcja" className="relative z-20 -mt-28 scroll-mt-20 pb-20 sm:-mt-32 sm:pb-28">
+          <div className="shell">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {PRODUCTS.map((product) => (
+                <article key={product.id} className="product-card soft-card group overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-sand">
+                    <Image src={product.image} alt={product.name} fill className="object-cover transition duration-700 group-hover:scale-[1.08]" sizes="(min-width: 1024px) 25vw, 50vw" />
+                    <span className="absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur">{product.tag}</span>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-[0.65rem] font-bold uppercase tracking-wider text-cocoa/40">Kategoria</p>
+                    <h3 className="mt-1 text-2xl font-semibold leading-6">{product.name}</h3>
+                    <p className="mt-3 min-h-12 text-sm leading-6 text-cocoa/60">{product.description}</p>
+                    <div className="mt-5 flex items-center justify-between">
+                      <p className="text-sm">od <strong>{formatPrice(product.price)}</strong></p>
+                      <Link href="/zamow" className="card-action" aria-label={`Personalizuj: ${product.name}`}><ArrowRight size={18} aria-hidden="true" /></Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="mt-20 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <div><p className="eyebrow">Początek Twojej historii</p><h2 className="mt-3 text-4xl font-medium sm:text-6xl">Wybierz swój <em className="font-normal text-gold">splot</em></h2></div>
+              <p className="max-w-md text-sm leading-7 text-cocoa/60">Każdy model jest punktem wyjścia. Kolor, kamień i znaczenie dobierzesz już po swojemu.</p>
+            </div>
           </div>
         </section>
 
-        <section id="jak-to-dziala" className="scroll-mt-20 bg-cocoa py-20 text-paper sm:py-28"><div className="shell"><p className="eyebrow">Od intencji do gotowej biżuterii</p><h2 className="mt-4 max-w-3xl text-4xl font-medium sm:text-6xl">Cztery spokojne kroki. <em className="font-normal text-sand">Jeden wyjątkowy efekt.</em></h2><ol className="mt-14 grid gap-px overflow-hidden rounded-[2rem] bg-paper/15 lg:grid-cols-4">{process.map(([number, title, description]) => <li key={number} className="bg-cocoa p-7"><span className="text-xs font-bold tracking-[0.2em] text-gold">{number}</span><h3 className="mt-12 text-3xl">{title}</h3><p className="mt-3 text-sm leading-6 text-paper/60">{description}</p></li>)}</ol></div></section>
+        <section id="jak-to-dziala" className="silk-band scroll-mt-20 py-20 sm:py-28">
+          <div className="shell">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <div><p className="eyebrow">Od intencji do gotowej biżuterii</p><h2 className="mt-4 max-w-3xl text-4xl font-medium sm:text-6xl">Cztery spokojne kroki. <em className="font-normal text-gold">Jeden olśniewający efekt.</em></h2></div>
+              <Sparkles className="hidden text-gold/70 sm:block" size={48} strokeWidth={1.2} aria-hidden="true" />
+            </div>
+            <ol className="mt-14 grid gap-4 lg:grid-cols-4">
+              {process.map(([number, title, description]) => (
+                <li key={number} className="process-card">
+                  <span className="process-number">{number}</span>
+                  <h3 className="mt-16 text-3xl">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-cocoa/60">{description}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
-        <section className="bg-blush py-20 sm:py-28"><div className="shell grid items-center gap-10 lg:grid-cols-2"><div className="relative min-h-[32rem]"><div className="absolute inset-y-0 left-0 w-[72%] overflow-hidden rounded-[2.5rem]"><Image src="/jewelry/amethyst-bracelet.webp" alt="Bransoletka z ametystem i zawieszką w kształcie księżyca" fill className="object-cover" /></div><div className="soft-card absolute bottom-6 right-0 w-56 p-6"><WandSparkles className="text-gold" aria-hidden="true" /><p className="mt-8 font-editorial text-3xl">Twój wybór ma znaczenie</p></div></div><div><p className="eyebrow">Personalizacja bez pośpiechu</p><h2 className="mt-4 text-4xl font-medium sm:text-6xl">Każdy detal może być <em className="font-normal text-gold">Twój</em></h2><p className="mt-6 max-w-xl text-base leading-8 text-cocoa/65">Zmieniaj kamień, kolor dodatków, rozmiar, zawieszkę, intencję i opakowanie. Cena aktualizuje się od razu, a podsumowanie zawsze pozostaje pod ręką.</p><ul className="mt-8 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">{["Kamień", "Kolor", "Rozmiar", "Zawieszka", "Intencja", "Opakowanie"].map((item) => <li key={item} className="rounded-full border border-cocoa/15 bg-paper/60 px-4 py-3 text-center font-semibold">{item}</li>)}</ul><Link className="button-primary mt-8" href="/zamow">Otwórz konfigurator <ArrowRight size={17} aria-hidden="true" /></Link></div></div></section>
+        <section className="silk-section py-16 sm:py-24">
+          <div className="shell">
+            <div className="editorial-panel grid overflow-hidden lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="relative min-h-[29rem] overflow-hidden lg:min-h-[42rem]">
+                <Image src="/jewelry/amethyst-bracelet.webp" alt="Bransoletka z ametystem i zawieszką w kształcie księżyca" fill className="object-cover transition duration-1000 hover:scale-105" sizes="(min-width: 1024px) 45vw, 100vw" />
+                <div className="absolute inset-x-5 bottom-5 rounded-[1.5rem] border border-paper/50 bg-paper/80 p-5 backdrop-blur-xl sm:left-auto sm:w-64">
+                  <WandSparkles className="text-gold" aria-hidden="true" />
+                  <p className="mt-5 font-editorial text-3xl">Twój wybór ma znaczenie</p>
+                </div>
+              </div>
+              <div className="relative flex flex-col justify-center bg-paper p-7 sm:p-12 lg:p-16">
+                <span className="editorial-ghost" aria-hidden="true">Twój</span>
+                <div className="relative">
+                  <p className="eyebrow">Personalizacja bez pośpiechu</p>
+                  <h2 className="mt-4 text-4xl font-medium sm:text-6xl">Każdy detal może być <em className="font-normal text-gold">Twój</em></h2>
+                  <p className="mt-6 max-w-xl text-base leading-8 text-cocoa/65">Zmieniaj kamień, kolor dodatków, rozmiar, zawieszkę, intencję i opakowanie. Cena aktualizuje się od razu, a podsumowanie zawsze pozostaje pod ręką.</p>
+                  <ul className="mt-8 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+                    {["Kamień", "Kolor", "Rozmiar", "Zawieszka", "Intencja", "Opakowanie"].map((item) => <li key={item} className="material-chip">{item}</li>)}
+                  </ul>
+                  <Link className="button-primary mt-8" href="/zamow">Otwórz konfigurator <ArrowRight size={17} aria-hidden="true" /></Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <section className="bg-paper py-20 sm:py-28"><div className="shell"><div className="text-center"><p className="eyebrow">Wasze słowa</p><h2 className="mt-4 text-4xl sm:text-6xl">Małe rzeczy, dużo emocji</h2><p className="mt-3 text-xs text-cocoa/45">Przykładowe opinie w wersji demo</p></div><div className="mt-12 grid gap-5 lg:grid-cols-3">{reviews.map(([name, quote]) => <figure key={name} className="soft-card p-7"><Heart className="text-gold" aria-hidden="true" /><blockquote className="mt-8 font-editorial text-2xl leading-8">„{quote}”</blockquote><figcaption className="mt-7 text-sm font-bold">{name} · klientka demo</figcaption></figure>)}</div></div></section>
+        <section className="silk-band py-20 sm:py-28">
+          <div className="shell">
+            <div className="text-center"><p className="eyebrow">Wasze słowa</p><h2 className="mt-4 text-4xl sm:text-6xl">Małe rzeczy, dużo emocji</h2><p className="mt-3 text-xs text-cocoa/45">Przykładowe opinie w wersji demo</p></div>
+            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+              {reviews.map(([name, quote], index) => (
+                <figure key={name} className={`review-card soft-card p-7 ${index === 1 ? "lg:-translate-y-5" : ""}`}>
+                  <div className="flex items-center justify-between"><Heart className="text-gold" aria-hidden="true" /><span className="text-xs tracking-[0.25em] text-gold">★★★★★</span></div>
+                  <blockquote className="mt-8 font-editorial text-2xl leading-8">„{quote}”</blockquote>
+                  <figcaption className="mt-7 text-sm font-bold">{name} · klientka demo</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <section id="faq" className="scroll-mt-20 border-t border-line bg-ivory py-20"><div className="shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr]"><div><p className="eyebrow">FAQ</p><h2 className="mt-3 text-4xl sm:text-5xl">Warto wiedzieć</h2><div className="mt-6 flex items-center gap-3 text-sm text-cocoa/60"><Gift className="text-gold" aria-hidden="true" /> Każde zamówienie może stać się prezentem.</div></div><div>{faqs.map(([question, answer]) => <details key={question} className="group border-b border-line py-5"><summary className="cursor-pointer list-none pr-8 font-semibold">{question}</summary><p className="mt-3 max-w-2xl text-sm leading-7 text-cocoa/60">{answer}</p></details>)}</div></div></section>
+        <section id="faq" className="scroll-mt-20 py-20 sm:py-28">
+          <div className="shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="eyebrow">FAQ</p>
+              <h2 className="mt-3 text-4xl sm:text-6xl">Warto<br /><em className="font-normal text-gold">wiedzieć</em></h2>
+              <div className="mt-8 inline-flex items-center gap-3 rounded-full bg-blush px-5 py-3 text-sm text-cocoa/70"><Gift className="text-gold" aria-hidden="true" /> Każde zamówienie może stać się prezentem.</div>
+            </div>
+            <div className="overflow-hidden rounded-[2rem] border border-line bg-ivory/70 px-6 shadow-sm sm:px-9">
+              {faqs.map(([question, answer], index) => (
+                <details key={question} className="faq-item group border-b border-line py-6 last:border-0">
+                  <summary className="flex cursor-pointer list-none items-center gap-5 font-semibold"><span className="font-editorial text-2xl text-gold">0{index + 1}</span><span className="flex-1">{question}</span><span className="faq-plus" aria-hidden="true">+</span></summary>
+                  <p className="ml-12 mt-3 max-w-2xl text-sm leading-7 text-cocoa/60">{answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <section className="bg-sand py-14"><div className="shell flex flex-col gap-6 rounded-[2.5rem] bg-cocoa p-8 text-paper sm:flex-row sm:items-center sm:justify-between sm:p-12"><div><PackageCheck className="text-gold" aria-hidden="true" /><h2 className="mt-6 text-4xl">Gotowa stworzyć coś swojego?</h2><p className="mt-2 text-sm text-paper/60">Przejdź pełną demonstracyjną ścieżkę zamówienia.</p></div><Link href="/zamow" className="inline-flex min-h-12 items-center justify-center rounded-full bg-paper px-6 text-sm font-bold text-cocoa">Zacznij personalizację <ArrowRight className="ml-2" size={17} aria-hidden="true" /></Link></div></section>
+        <section className="silk-section py-14 sm:py-20">
+          <div className="shell">
+            <div className="cta-jewel flex flex-col gap-8 overflow-hidden rounded-[2.75rem] bg-cocoa p-8 text-paper sm:flex-row sm:items-center sm:justify-between sm:p-12 lg:p-16">
+              <div className="relative"><PackageCheck className="text-gold" aria-hidden="true" /><h2 className="mt-6 max-w-2xl text-4xl sm:text-6xl">Gotowa stworzyć coś <em className="font-normal text-sand">swojego?</em></h2><p className="mt-3 text-sm text-paper/60">Przejdź pełną demonstracyjną ścieżkę zamówienia.</p></div>
+              <Link href="/zamow" className="hero-button-light group shrink-0">Zacznij personalizację <ArrowRight size={17} aria-hidden="true" /></Link>
+            </div>
+          </div>
+        </section>
       </main>
       <DemoFooter />
     </div>

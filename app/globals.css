@@ -35,7 +35,13 @@
 @layer base {
   * { @apply border-line; }
   html { scroll-behavior: smooth; overflow-x: hidden; }
-  body { @apply bg-ivory text-ink font-sans antialiased; }
+  body {
+    @apply bg-ivory text-ink font-sans antialiased;
+    background-image: linear-gradient(oklch(0.975 0.012 75 / 0.84), oklch(0.975 0.012 75 / 0.9)), url("/jewelry/ivory-silk-background.webp");
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
   h1, h2, h3, .font-editorial { font-family: var(--font-serif); }
   button, a, input, select, textarea { @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold; }
   button, a { @apply transition duration-200; }
@@ -44,10 +50,204 @@
 
 .shell { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
 .eyebrow { @apply text-xs font-bold uppercase tracking-[0.18em] text-gold; }
-.button-primary { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-cocoa px-6 text-sm font-bold text-paper shadow-sm hover:-translate-y-0.5 hover:bg-ink; }
-.button-secondary { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-cocoa/20 bg-paper px-6 text-sm font-bold text-ink hover:-translate-y-0.5 hover:border-cocoa/50; }
-.soft-card { @apply rounded-[2rem] border border-line/80 bg-paper shadow-[0_1.25rem_3.75rem_-2rem_oklch(0.27_0.035_55_/_0.25)]; }
+.button-primary {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-cocoa px-6 text-sm font-bold text-paper shadow-sm;
+  background-image: linear-gradient(110deg, transparent 0 38%, rgb(255 255 255 / 0.25) 49%, transparent 60%);
+  background-position: 125% center;
+  background-size: 240% 100%;
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) ease, background-position 650ms ease, background-color var(--duration-fast) ease;
+}
+
+.button-primary:hover {
+  @apply bg-ink;
+  background-position: -45% center;
+  box-shadow: 0 0.9rem 2rem -0.8rem oklch(0.27 0.035 55 / 0.55), 0 0 0 1px oklch(0.67 0.105 72 / 0.35);
+  transform: translateY(-3px);
+}
+
+.button-primary:hover svg,
+.hero-button-light:hover svg { transform: translateX(4px); }
+
+.button-secondary {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-cocoa/20 bg-paper px-6 text-sm font-bold text-ink;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease, background-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.button-secondary:hover {
+  @apply border-gold bg-blush;
+  box-shadow: 0 0.75rem 1.8rem -1rem oklch(0.67 0.105 72 / 0.5);
+  transform: translateY(-2px) scale(1.015);
+}
+
+.soft-card {
+  @apply rounded-[2rem] border border-paper/80 bg-paper/95 shadow-[0_1.25rem_3.75rem_-2rem_oklch(0.27_0.035_55_/_0.25)] backdrop-blur-sm;
+}
 .grain { background-image: radial-gradient(circle at 20% 20%, color-mix(in oklch, var(--gold) 9%, transparent) 0, transparent 34%), radial-gradient(circle at 80% 65%, color-mix(in oklch, var(--blush) 70%, transparent) 0, transparent 38%); }
+
+.silk-page { background: transparent; }
+
+.silk-section,
+.silk-band {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-button-light {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper px-6 text-sm font-bold text-cocoa shadow-xl;
+  transition: color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) ease;
+}
+
+.hero-button-light svg { transition: transform var(--duration-fast) var(--ease-out); }
+
+.hero-button-light:hover {
+  @apply text-gold;
+  box-shadow: 0 1rem 2.8rem -0.8rem oklch(0.995 0.006 80 / 0.65), 0 0 0 2px oklch(0.67 0.105 72 / 0.5);
+  transform: translateY(-4px);
+}
+
+.hero-button-ghost {
+  @apply inline-flex min-h-12 items-center justify-center rounded-full border border-paper/45 bg-paper/10 px-6 text-sm font-bold text-paper backdrop-blur;
+  transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);
+}
+
+.hero-button-ghost:hover {
+  @apply bg-paper text-cocoa;
+  transform: translateY(-2px);
+}
+
+.product-card {
+  transition: transform 420ms var(--ease-out), box-shadow 420ms ease, border-color var(--duration-fast) ease;
+}
+
+.product-card:hover {
+  @apply border-gold/50;
+  box-shadow: 0 2rem 4.5rem -2rem oklch(0.27 0.035 55 / 0.42), 0 0 0 1px oklch(0.67 0.105 72 / 0.12);
+  transform: translateY(-10px);
+}
+
+.card-action {
+  @apply flex size-11 items-center justify-center rounded-full bg-cocoa text-paper;
+  transition: transform 350ms var(--ease-out), background-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.product-card:hover .card-action,
+.card-action:hover {
+  @apply bg-gold;
+  box-shadow: 0 0.7rem 1.5rem -0.6rem oklch(0.67 0.105 72 / 0.75);
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.process-card {
+  @apply relative min-h-72 overflow-hidden rounded-[2rem] border border-paper/80 bg-paper/75 p-7 shadow-[0_1.25rem_3rem_-2rem_oklch(0.27_0.035_55_/_0.28)] backdrop-blur-md;
+  transition: color 420ms ease, background-color 420ms ease, transform 420ms var(--ease-out), box-shadow 420ms ease;
+}
+
+.process-card::after {
+  position: absolute;
+  right: -2rem;
+  bottom: -4rem;
+  width: 9rem;
+  height: 9rem;
+  content: "";
+  border-radius: 9999px;
+  background: oklch(0.67 0.105 72 / 0.16);
+  transition: transform 500ms var(--ease-out);
+}
+
+.process-card:hover {
+  @apply bg-cocoa text-paper;
+  box-shadow: 0 2rem 4rem -2rem oklch(0.27 0.035 55 / 0.65);
+  transform: translateY(-8px) rotate(-0.7deg);
+}
+
+.process-card:hover p { color: oklch(0.995 0.006 80 / 0.66); }
+.process-card:hover::after { transform: translate(-1rem, -1rem) scale(1.35); }
+
+.process-number {
+  @apply inline-flex size-12 items-center justify-center rounded-full border border-gold/40 bg-blush/70 text-xs font-bold tracking-[0.18em] text-gold;
+}
+
+.editorial-panel {
+  border-radius: 2.75rem;
+  box-shadow: 0 2.5rem 6rem -3rem oklch(0.27 0.035 55 / 0.5);
+}
+
+.editorial-ghost {
+  @apply pointer-events-none absolute -right-8 top-4 text-[9rem] leading-none text-blush/55 sm:text-[12rem];
+  font-family: var(--font-serif);
+}
+
+.material-chip {
+  @apply rounded-full border border-cocoa/15 bg-ivory/80 px-4 py-3 text-center font-semibold;
+  transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease, border-color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);
+}
+
+.material-chip:hover {
+  @apply border-gold bg-cocoa text-paper;
+  transform: translateY(-3px) rotate(-1deg);
+}
+
+.review-card {
+  transition: border-color 350ms ease, background-color 350ms ease, box-shadow 350ms ease, transform 350ms var(--ease-out);
+}
+
+.review-card:hover {
+  @apply border-gold/60 bg-paper;
+  box-shadow: 0 2rem 4rem -2rem oklch(0.27 0.035 55 / 0.4);
+  transform: translateY(-7px);
+}
+
+.faq-item summary { transition: color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out); }
+.faq-item summary:hover { @apply text-gold; transform: translateX(5px); }
+.faq-plus { @apply flex size-9 items-center justify-center rounded-full bg-paper text-xl text-gold shadow-sm; transition: transform 350ms var(--ease-out), background-color var(--duration-fast) ease, color var(--duration-fast) ease; }
+.faq-item[open] .faq-plus { @apply bg-cocoa text-paper; transform: rotate(45deg); }
+
+.cta-jewel { position: relative; }
+.cta-jewel::after {
+  position: absolute;
+  top: -7rem;
+  right: 19%;
+  width: 18rem;
+  height: 18rem;
+  content: "";
+  border-radius: 9999px;
+  background: radial-gradient(circle, oklch(0.67 0.105 72 / 0.34), transparent 68%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.logo-mark { transition: transform 500ms var(--ease-out), box-shadow 350ms ease; }
+.logo-link:hover .logo-mark { box-shadow: 0 0 0 3px oklch(0.67 0.105 72 / 0.35), 0 0.9rem 2rem -0.8rem oklch(0.27 0.035 55 / 0.5); transform: rotate(-7deg) scale(1.06); }
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  position: absolute;
+  right: 50%;
+  bottom: -0.3rem;
+  left: 50%;
+  height: 1px;
+  content: "";
+  background: var(--gold);
+  transition: right 280ms var(--ease-out), left 280ms var(--ease-out);
+}
+
+.nav-link:hover { @apply text-gold; }
+.nav-link:hover::after { right: 0; left: 0; }
+
+button svg,
+a svg { transition: transform var(--duration-fast) var(--ease-out); }
+
+button[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px oklch(0.995 0.006 80), 0 0 0 4px oklch(0.67 0.105 72 / 0.45), 0 1rem 2rem -1.4rem oklch(0.27 0.035 55 / 0.55);
+}
+
+button[aria-pressed="false"]:hover {
+  @apply border-gold/60 bg-paper;
+  transform: translateY(-3px);
+}
 
 .page-wash {
   @apply pointer-events-none fixed inset-0 z-[100] flex items-center justify-center bg-ivory;
