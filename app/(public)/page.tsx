@@ -91,7 +91,7 @@ export default function HomePage() {
               {process.map(([number, title, description]) => (
                 <li key={number} className="process-card">
                   <span className="process-number">{number}</span>
-                  <h3 className="mt-16 text-3xl">{title}</h3>
+                  <h3 className="process-title mt-16">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-cocoa/60">{description}</p>
                 </li>
               ))}

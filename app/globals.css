@@ -182,7 +182,18 @@
 
 .process-card {
   @apply relative min-h-72 overflow-hidden rounded-[2rem] border border-paper/80 bg-paper/75 p-7 shadow-[0_1.25rem_3rem_-2rem_oklch(0.27_0.035_55_/_0.28)] backdrop-blur-md;
-  transition: color 420ms ease, background-color 420ms ease, transform 420ms var(--ease-out), box-shadow 420ms ease;
+  background-image: linear-gradient(125deg, transparent 28%, oklch(0.93 0.025 35 / 0.55) 50%, transparent 72%);
+  background-position: 120% center;
+  background-size: 260% 100%;
+  transition: background-position var(--duration-slow) var(--ease-out), border-color var(--duration-fast) ease, transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) ease;
+}
+
+.process-card::before {
+  @apply absolute left-7 right-7 top-0 h-px bg-gold;
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.25);
+  transition: opacity var(--duration-fast) ease, transform var(--duration-normal) var(--ease-out);
 }
 
 .process-card::after {
@@ -198,17 +209,26 @@
 }
 
 .process-card:hover {
-  @apply bg-cocoa text-paper;
-  box-shadow: 0 2rem 4rem -2rem oklch(0.27 0.035 55 / 0.65);
-  transform: translateY(-8px) rotate(-0.7deg);
+  @apply border-gold/55;
+  background-position: -25% center;
+  box-shadow: 0 2rem 4rem -2rem oklch(0.67 0.105 72 / 0.48), 0 0 0 1px oklch(0.995 0.006 80 / 0.75);
+  transform: translateY(-7px);
 }
 
-.process-card:hover p { color: oklch(0.995 0.006 80 / 0.66); }
-.process-card:hover::after { transform: translate(-1rem, -1rem) scale(1.35); }
+.process-card:hover::before { opacity: 1; transform: scaleX(1); }
+.process-card:hover::after { transform: translate(-1rem, -1rem) scale(1.25); }
+
+.process-title {
+  @apply text-2xl font-extrabold leading-tight tracking-[-0.035em];
+  font-family: var(--font-sans);
+}
 
 .process-number {
   @apply inline-flex size-12 items-center justify-center rounded-full border border-gold/40 bg-blush/70 text-xs font-bold tracking-[0.18em] text-gold;
+  transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease, transform var(--duration-normal) var(--ease-out);
 }
+
+.process-card:hover .process-number { @apply bg-gold text-paper; transform: rotate(-7deg) scale(1.06); }
 
 .editorial-panel {
   border-radius: 2.75rem;
