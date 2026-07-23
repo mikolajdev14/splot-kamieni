@@ -12,7 +12,7 @@ const serif = Bodoni_Moda({
 });
 
 export const metadata: Metadata = {
-  title: "Splot Kamieni | Biżuteria z kamieni naturalnych",
+  title: "Lunaria Atelier | Biżuteria z kamieni naturalnych",
   description: "Klikalne demo zamawiania personalizowanej biżuterii z kamieni naturalnych.",
 };
 

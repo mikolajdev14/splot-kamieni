@@ -37,7 +37,7 @@ function CheckoutContent() {
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); if (!item || loading) return; setLoading(true);
-    const id = `SK-2026-${String(Math.floor(42 + Math.random() * 50)).padStart(4, "0")}`;
+    const id = `LA-2026-${String(Math.floor(42 + Math.random() * 50)).padStart(4, "0")}`;
     const order: DemoOrder = { ...item, id, customer: name, email: "anna@example.pl", phone: "+48 500 200 300", address: "ul. Kwiatowa 8, 00-001 Warszawa", delivery, payment, dueDate: speed === "Ekspresowy" ? "23 lip 2026" : "28 lip 2026", createdAt: "20 lip 2026", status: "Opłacone", total };
     window.setTimeout(() => { const current = JSON.parse(localStorage.getItem(ORDERS_KEY) ?? "[]") as DemoOrder[]; localStorage.setItem(ORDERS_KEY, JSON.stringify([order, ...current])); router.push(`/zamow/sukces?order=${id}`); }, 900);
   };

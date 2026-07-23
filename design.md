@@ -1,10 +1,10 @@
-# Splot Kamieni design direction
+# Lunaria Atelier design direction
 
 source: image reference and Instagram profile supplied by the user
 
 ## Character
 
-Splot Kamieni is a luminous editorial commerce demo for handmade natural stone jewelry. It combines generous serif headlines, tactile product photography, pearly silk backgrounds and layered commerce cards. The result feels feminine, natural and personal. It is premium without becoming formal or inaccessible.
+Lunaria Atelier is a luminous editorial commerce demo for handmade natural stone jewelry. It combines generous serif headlines, tactile product photography, pearly silk backgrounds and layered commerce cards. The result feels feminine, natural and personal. It is premium without becoming formal or inaccessible.
 
 ## Build mandate
 

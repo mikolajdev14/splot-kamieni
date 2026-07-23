@@ -1,4 +1,4 @@
-# Splot Kamieni
+# Lunaria Atelier
 
 Klikalne demo procesu zamawiania ręcznie robionej biżuterii z kamieni naturalnych. Projekt prezentuje dwie strony biznesu: mobilną ścieżkę klientki oraz panel właścicielki pracowni.
 

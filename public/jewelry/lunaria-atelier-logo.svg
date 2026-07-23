@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Lunaria Atelier</title>
+  <desc id="desc">Monogram LA w okrągłej oprawie</desc>
+  <circle cx="64" cy="64" r="62" fill="#fbf5ec"/>
+  <circle cx="64" cy="64" r="57" fill="none" stroke="#c59043" stroke-width="1.5"/>
+  <circle cx="64" cy="64" r="49" fill="none" stroke="#3a2518" stroke-width="1" opacity=".72"/>
+  <path d="M35 34v57h28" fill="none" stroke="#3a2518" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M65 91 84 34l19 57M72 71h24" fill="none" stroke="#3a2518" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m64 21 3.5 3.5L64 28l-3.5-3.5Z" fill="#c59043"/>
+</svg>

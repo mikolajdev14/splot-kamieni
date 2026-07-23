@@ -54,18 +54,18 @@ export const STONES = [
 ];
 
 export const BASE_PRICE = 129;
-export const CART_KEY = "splot-kamieni-cart";
-export const ORDERS_KEY = "splot-kamieni-orders";
+export const CART_KEY = "lunaria-atelier-cart";
+export const ORDERS_KEY = "lunaria-atelier-orders";
 
 export const MOCK_ORDERS: DemoOrder[] = [
-  ["SK-2026-0041", "Anna Kowalska", "Bransoletka z intencją", "Ametyst", 159, "W realizacji", "24 lip"],
-  ["SK-2026-0040", "Julia Nowak", "Zestaw prezentowy", "Kwarc różowy", 241, "Gotowe do wysyłki", "22 lip"],
-  ["SK-2026-0039", "Marta Wiśniewska", "Naszyjnik z kamieniem", "Akwamaryn", 184, "Opłacone", "26 lip"],
-  ["SK-2026-0038", "Zofia Wójcik", "Bransoletka urodzeniowa", "Cytryn", 164, "Wymaga kontaktu", "28 lip"],
-  ["SK-2026-0037", "Aleksandra Kamińska", "Bransoletka z intencją", "Turmalin czarny", 151, "Wysłane", "18 lip"],
-  ["SK-2026-0036", "Natalia Zielińska", "Zestaw prezentowy", "Kamień księżycowy", 256, "Nowe", "30 lip"],
-  ["SK-2026-0035", "Emilia Lewandowska", "Bransoletka z intencją", "Kwarc różowy", 139, "W realizacji", "25 lip"],
-  ["SK-2026-0034", "Karolina Mazur", "Naszyjnik z kamieniem", "Ametyst", 179, "Opłacone", "27 lip"],
+  ["LA-2026-0041", "Anna Kowalska", "Bransoletka z intencją", "Ametyst", 159, "W realizacji", "24 lip"],
+  ["LA-2026-0040", "Julia Nowak", "Zestaw prezentowy", "Kwarc różowy", 241, "Gotowe do wysyłki", "22 lip"],
+  ["LA-2026-0039", "Marta Wiśniewska", "Naszyjnik z kamieniem", "Akwamaryn", 184, "Opłacone", "26 lip"],
+  ["LA-2026-0038", "Zofia Wójcik", "Bransoletka urodzeniowa", "Cytryn", 164, "Wymaga kontaktu", "28 lip"],
+  ["LA-2026-0037", "Aleksandra Kamińska", "Bransoletka z intencją", "Turmalin czarny", 151, "Wysłane", "18 lip"],
+  ["LA-2026-0036", "Natalia Zielińska", "Zestaw prezentowy", "Kamień księżycowy", 256, "Nowe", "30 lip"],
+  ["LA-2026-0035", "Emilia Lewandowska", "Bransoletka z intencją", "Kwarc różowy", 139, "W realizacji", "25 lip"],
+  ["LA-2026-0034", "Karolina Mazur", "Naszyjnik z kamieniem", "Ametyst", 179, "Opłacone", "27 lip"],
 ].map(([id, customer, product, stone, total, status, dueDate]) => ({
   id: String(id), customer: String(customer), product: String(product), stone: String(stone), total: Number(total), status: String(status), dueDate: String(dueDate),
   email: `${String(customer).split(" ")[0].toLowerCase()}@example.pl`, phone: "+48 500 200 300", address: "ul. Kwiatowa 8, 00-001 Warszawa",
